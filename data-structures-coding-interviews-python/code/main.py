@@ -18,8 +18,8 @@ def bfs_traversal_helper(g, source, visited):
         # Get adjacent vertices to the current_node from the list,
         # and if they are not already visited then enqueue them in the Queue
         temp = g.array[current_node].head_node
-        while (temp is not None):
-            if(visited[temp.data] is False):
+        while temp is not None:
+            if not visited[temp.data]:
                 queue.enqueue(temp.data)
                 visited[temp.data] = True  # Visit the current Node
             temp = temp.next_element
@@ -28,7 +28,7 @@ def bfs_traversal_helper(g, source, visited):
 def bfs_traversal(g, source):
     result = ""
     num_of_vertices = g.vertices
-    if num_of_vertices is 0:
+    if num_of_vertices == 0:
         return result
     # A list to hold the history of visited nodes
     # Make a node visited whenever you enqueue it into queue
@@ -39,7 +39,7 @@ def bfs_traversal(g, source):
     result, visited = bfs_traversal_helper(g, source, visited)
     # visit remaining nodes
     for i in range(num_of_vertices):
-        if visited[i] is False:
+        if not visited[i]:
             result_new, visited = bfs_traversal_helper(g, i, visited)
             result += result_new
     return result
@@ -49,9 +49,9 @@ def bfs_traversal(g, source):
 g = Graph(4)
 num_of_vertices = g.vertices
 
-if(num_of_vertices is 0):
+if num_of_vertices == 0:
     print("Graph is empty")
-elif(num_of_vertices < 0):
+elif num_of_vertices < 0:
     print("Graph cannot have negative vertices")
 else:
     g.add_edge(0, 1)
