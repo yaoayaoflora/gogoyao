@@ -1,9 +1,9 @@
-class myQueue:
+class MyQueue:
     def __init__(self):
         self.queue_list = []
 
     def is_empty(self):
-        return self.size() == 0
+        return len(self.queue_list) == 0
 
     def front(self):
         if self.is_empty():
@@ -14,9 +14,6 @@ class myQueue:
         if self.is_empty():
             return None
         return self.queue_list[-1]
-
-    def size(self):
-        return len(self.queue_list)
 
     def enqueue(self, value):
         self.queue_list.append(value)
