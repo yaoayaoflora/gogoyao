@@ -31,8 +31,6 @@ class LinkedList:
         return None
     
     def length(self):
-        if self.is_empty():
-            return 0
         len = 0
         current_node = self.get_head()
         while current_node:
@@ -68,13 +66,28 @@ class LinkedList:
         
         while current_node:
             if current_node.data == value:
-                last_element.next_element = current_node.next_element
+                previous_node.next_element = current_node.next_element
                 current_node.next_element = None
                 return '{} was deleted!'.format(value)
-            last_element = current_node
+            previous_node = current_node
             current_node = current_node.next_element
         return '{} is not in the list!'.format(value)
 
+    def reverse(self):
+        # To reverse linked, we need to keep track of three things
+        previous = None # Maintain track of the previous node
+        current = self.get_head() # The current node
+        next = None # The next node in the list
+
+        #Reversal
+        while current:
+            next = current.next_element
+            current.next_element = previous
+            previous = current
+            current = next
+            
+            #Set the last element as the new head node
+            self.head_node = previous
 
     # Supplementary print function
     def print_list(self):
