@@ -1,61 +1,62 @@
-import numpy as np
+from Graph import Graph
+from Queue import MyQueue
+from Stack import MyStack
 
 
-class TwoStacks:
-    def __init__(self, n):  # constructor
-        self.size = n
-        self.arr = np.zeros([n], dtype=int)
-        self.top1 = -1
-        self.top2 = self.size
+def bfs_traversal_helper(g, source, visited):
+    result = ""
+    # Create Queue(implemented in previous lesson) for Breadth First Traversal
+    # and enqueue source in it
+    queue = MyQueue()
+    queue.enqueue(source)
+    visited[source] = True # Mark as visited
+    # Traverse while queue is not empty
+    while queue.is_empty() == False:
+        # Dequeue a vertex/node from queue and add it to result
+        current_node = queue.dequeue()
+        result += str(current_node)
+        # Get adjacent vertices to the current_node from the list,
+        # and if they are not already visited then enqueue them in the Queue
+        temp = g.array[current_node].head_node
+        while temp is not None:
+            if visited[temp.data] == False:
+                queue.enqueue(temp.data)
+                visited[temp.data] = True  # Visit the current Node
+            temp = temp.next_element
+    return result, visited
 
-    # Method to push an element x to stack1
-    def push1(self, x):
-
-        # There is at least one empty space for new element
-        if self.top1 < self.top2 - 1:
-            self.top1 = self.top1 + 1
-            self.arr[self.top1] = x
-
-        else:
-            print("Stack Overflow ")
-            exit(1)
-
-    # Method to push an element x to stack2
-    def push2(self, x):
-
-        # There is at least one empty space for new element
-        if self.top1 < self.top2 - 1:
-            self.top2 = self.top2 - 1
-            self.arr[self.top2] = x
-
-        else:
-            print("Stack Overflow ")
-            exit(1)
-
-    # Method to pop an element from first stack
-    def pop1(self):
-        if self.top1 >= 0:
-            x = self.arr[self.top1]
-            self.top1 = self.top1 - 1
-            return x
-        else:
-            print("Stack Underflow ")
-            exit(1)
-
-    # Method to pop an element from second stack
-    def pop2(self):
-        if self.top2 < self.size:
-            x = self.arr[self.top2]
-            self.top2 = self.top2 + 1
-            return x
-        else:
-            print("Stack Underflow ")
-            exit()
+def bfs_traversal(g, source):
+    result = ""
+    num_of_vertices = g.vertices
+    if num_of_vertices == 0:
+        return result
+    # A list to hold the history of visited nodes
+    # Make a node visited whenever you enqueue it into queue
+    visited = []
+    for i in range(num_of_vertices):
+        visited.append(False)
+    # Start from source
+    result, visited = bfs_traversal_helper(g, source, visited)
+    # visit remaining nodes
+    for i in range(num_of_vertices):
+        if visited[i] == False:
+            result_new, visited = bfs_traversal_helper(g, i, visited)
+            result += result_new
+    return result
+    
 
 
-stack = TwoStacks(10)
-stack.push1(20)
-stack.push2(10)
+g = Graph(4)
+num_of_vertices = g.vertices
 
-print(stack.pop1())
-stack.push1(100)
+if num_of_vertices == 0:
+    print("Graph is empty")
+elif num_of_vertices < 0:
+    print("Graph cannot have negative vertices")
+else:
+    g.add_edge(0, 1)
+    g.add_edge(0, 2)
+    g.add_edge(1, 3)
+    g.add_edge(2, 3)
+
+    print(bfs_traversal(g, 0))
