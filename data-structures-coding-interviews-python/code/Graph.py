@@ -13,7 +13,11 @@ class Graph:
             temp = LinkedList()
             self.array.append(temp)
 
+<<<<<<< HEAD
     # Function to add an edge from source to destination
+=======
+     # Function to add an edge from source to destination
+>>>>>>> ae719534395c6f5aa6fb3b6bf7410376519186d7
     def add_edge(self, source, destination):
         if (source < self.vertices and destination < self.vertices):
         # As we are implementing a directed graph, (1,0) is not equal to (0,1)
