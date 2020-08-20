@@ -28,7 +28,7 @@ def dfs_traversal_helper(g, source, visited):
 def dfs_traversal(g, source):
     result = ""
     num_of_vertices = g.vertices
-    if num_of_vertices is 0:
+    if num_of_vertices == 0:
         return result
     # A list to hold the history of visited nodes
     # Make a node visited whenever you enqueue it into queue
