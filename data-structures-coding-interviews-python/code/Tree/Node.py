@@ -5,72 +5,114 @@ class Node:
         self.rightChild = None
 
     def insert(self, val):
-        if val < self.val:
-            if self.leftChild:
-                self.leftChild.insert(val)
+        if self is None:
+            self = Node(val)
+            return
+        current = self
+        while current:
+            parent = current
+            if val < current.val:
+                current = current.leftChild
             else:
-                self.leftChild = Node(val)
-                return
+                current = current.rightChild
+
+        if val < parent.val:
+            parent.leftChild = Node(val)
         else:
-            if self.rightChild:
-                self.rightChild.insert(val)
-            else:
-                self.rightChild = Node(val)
-                return
+            parent.rightChild = Node(val)
 
     def search(self, val):
-        if val < self.val:
-            if self.leftChild:
-                return self.leftChild.search(val)
+        if self is None:
+            return self
+        current = self
+        while current and current.val != val:
+            if val < current.val:
+                current = current.leftChild
             else:
-                return False
-        elif val > self.val:
-            if self.rightChild:
-                return self.rightChild.search(val)
-            else:
-                return False
-        else:
-            return True
-        return False
+                current = current.rightChild
+        return current
+
+    def copy(self, node2):  # When `self` needs to be modified
+        self.val = node2.val
+        if node2.leftChild:
+            self.leftChild = node2.leftChild
+        if node2.rightChild:
+            self.rightChild = node2.rightChild
 
     def delete(self, val):
-        # if current node's val is less than that of root node,
-        # then only search in left subtree otherwise right subtree
-        if val < self.val:
-            if(self.leftChild):
-                self.leftChild = self.leftChild.delete(val)
-            else:
-                print(str(val) + " not found in the tree")
-                return self
-        elif val > self.val:
-            if(self.rightChild):
-                self.rightChild = self.rightChild.delete(val)
-            else:
-                print(str(val) + " not found in the tree")
-                return self
-        else:
-            # deleting node with no children
-            if self.leftChild is None and self.rightChild is None:
-                self = None
-                return None
-            # deleting node with right child
-            elif self.leftChild is None:
-                tmp = self.rightChild
-                self = None
-                return tmp
-            # deleting node with left child
-            elif self.rightChild is None:
-                tmp = self.leftChild
-                self = None
-                return tmp
-            # deleting node with two children
-            else:
-                # first get the inorder successor
-                current = self.rightChild
-                # loop down to find the leftmost leaf
-                while(current.leftChild is not None):
-                    current = current.leftChild
-                self.val = current.val
-                self.rightChild = self.rightChild.delete(current.val)
+        # case 1: Tree is empty
+        if self is None:
+            return False
 
-        return self
+        # Searching for the given value
+        node = self
+        while node and node.val != val:
+            parent = node
+            if val < node.val:
+                node = node.leftChild
+            else:
+                node = node.rightChild
+
+        # case 2: If data is not found
+        if node is None or node.val != val:
+            return False
+
+        # case 3: leaf node
+        elif node.leftChild is None and node.rightChild is None:
+            if val < parent.val:
+                parent.leftChild = None
+            else:
+                parent.rightChild = None
+            return True
+
+        # case 4: node has left child only
+        elif node.leftChild and node.rightChild is None:
+            if parent is None:  # When node is root
+                '''
+                Have to create a deepcopy because 'self' is a local variable
+                and changing it will not overwrite 'root' in the
+                binarySearchTree class
+                '''
+                self.copy(self.leftChild)
+                self.leftChild = None  # Setting the leftChild to `None`
+            elif val < parent.val:
+                parent.leftChild = node.leftChild
+            else:
+                parent.rightChild = node.leftChild
+            return True
+
+        # case 5: node has right child only
+        elif node.rightChild and node.leftChild is None:
+            if parent is None:  # When node is root
+                '''
+                Have to create a deepcopy because 'self' is a local variable
+                and changing it will not overwrite 'root' in the
+                binarySearchTree class
+                '''
+                self.copy(self.rightChild)
+                self.rightChild = None  # Setting the leftChild to `None`
+            elif val < parent.val:
+                parent.leftChild = node.rightChild
+            else:
+                parent.rightChild = node.rightChild
+            return True
+
+        # case 6: node has two children
+        else:
+            replaceNodeParent = node
+            replaceNode = node.rightChild
+            while replaceNode.leftChild:
+                replaceNodeParent = replaceNode
+                replaceNode = replaceNode.leftChild
+
+            node.val = replaceNode.val
+            if replaceNode.rightChild:
+                if replaceNodeParent.val > replaceNode.val:
+                    replaceNodeParent.leftChild = replaceNode.rightChild
+            elif replaceNodeParent.val < replaceNode.val:
+                replaceNodeParent.rightChild = replaceNode.rightChild
+            else:
+                if replaceNode.val < replaceNodeParent.val:
+                    replaceNodeParent.leftChild = None
+                else:
+                    replaceNodeParent.rightChild = None
