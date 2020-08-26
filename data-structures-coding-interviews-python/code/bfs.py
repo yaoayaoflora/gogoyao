@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-from LinkedList import LinkedList
-from Node import Node
-
-lst = LinkedList()
-lst.insert_at_head(1)
-lst.insert_at_head(4)
-lst.insert_at_head(3)
-lst.insert_at_head(2)
-lst.print_list()
-print(lst.delete(2))
-lst.print_list()
-=======
 from Graph import Graph
 from Queue import MyQueue
 from Stack import MyStack
@@ -24,10 +11,14 @@ def bfs_traversal_helper(g, source, visited):
     queue.enqueue(source)
     visited[source] = True # Mark as visited
     # Traverse while queue is not empty
-    while(queue.is_empty() is False):
+    while not queue.is_empty():
         # Dequeue a vertex/node from queue and add it to result
+        print('queque: ', queue.queue_list)
         current_node = queue.dequeue()
         result += str(current_node)
+        print('current_node:', current_node)
+        print('result:', result, '\n')
+        
         # Get adjacent vertices to the current_node from the list,
         # and if they are not already visited then enqueue them in the Queue
         temp = g.array[current_node].head_node
@@ -45,9 +36,7 @@ def bfs_traversal(g, source):
         return result
     # A list to hold the history of visited nodes
     # Make a node visited whenever you enqueue it into queue
-    visited = []
-    for i in range(num_of_vertices):
-        visited.append(False)
+    visited = [False] * num_of_vertices
     # Start from source
     result, visited = bfs_traversal_helper(g, source, visited)
     # visit remaining nodes
@@ -59,7 +48,7 @@ def bfs_traversal(g, source):
     
 
 
-g = Graph(4)
+g = Graph(6)
 num_of_vertices = g.vertices
 
 if num_of_vertices == 0:
@@ -69,8 +58,10 @@ elif num_of_vertices < 0:
 else:
     g.add_edge(0, 1)
     g.add_edge(0, 2)
+    g.add_edge(0, 4)
     g.add_edge(1, 3)
     g.add_edge(2, 3)
-
+    g.add_edge(3, 5)
+    g.add_edge(3, 1)
+    g.print_graph()
     print(bfs_traversal(g, 0))
->>>>>>> 763a5b4694e96a79e4cb6e3afbacdc33308e76a8
