@@ -7,6 +7,7 @@
 【机器学习】逻辑回归（非常详细） - 阿泽的文章 - 知乎
 https://zhuanlan.zhihu.com/p/74874291
 ### SVM
+### Decision Tree
 ### Ensemble Methods
 https://scikit-learn.org/stable/modules/ensemble.html#
 
