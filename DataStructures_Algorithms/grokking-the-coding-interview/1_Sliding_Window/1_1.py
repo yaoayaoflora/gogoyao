@@ -8,14 +8,10 @@ def max_sub_array_of_size_k(k, arr):
 
     for windowEnd in range(len(arr)):
         windowSum += arr[windowEnd]
-        if windowEnd - windowStart >= k:
+        if windowEnd - windowStart >= k: # windowEnd >= k - 1
             windowSum -= arr[windowStart]
             windowStart += 1
-        print('windowStart = ' + str(windowStart))
-        print('windowEnd = ' + str(windowEnd))
-        print('windowSum = ' + str(windowSum))
         maxSum = max(maxSum, windowSum)
-        print('maxSum = ' + str(maxSum))
     
     return maxSum
 
