@@ -8,6 +8,9 @@
 https://zhuanlan.zhihu.com/p/74874291
 ### SVM
 ### Decision Tree
+决策树是如何选择特征和分裂点？
+https://mp.weixin.qq.com/s/mHZBDY_uFfwVBvHgFXQuqw
+
 ### Ensemble Methods
 https://scikit-learn.org/stable/modules/ensemble.html#
 
