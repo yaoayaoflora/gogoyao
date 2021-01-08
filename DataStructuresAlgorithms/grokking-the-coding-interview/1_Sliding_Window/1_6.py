@@ -3,24 +3,25 @@
 # replacement.
 
 def length_of_longest_substring(str1, k):
-    start = 0
+    startIndex = 0
     maxLength = 0
     maxRepeatLetterCount = 0
     charFreq = {}
 
-    for end in range(len(str1)):
-        right = str1[end]
-        if right not in charFreq:
-            charFreq[right] = 0
-        charFreq[right] += 1
-        maxRepeatLetterCount = max(maxRepeatLetterCount, charFreq[right])
-        if (end - start + 1 - maxRepeatLetterCount) > k:
-            left = str1[start]
-            charFreq[left] -= 1
-            start += 1
-        maxLength = max(maxLength, end - start + 1)
+    for endIndex in range(len(str1)):
+        rightChar = str1[endIndex]
+        if rightChar not in charFreq:
+            charFreq[rightChar] = 0
+        charFreq[rightChar] += 1
+        maxRepeatLetterCount = max(maxRepeatLetterCount, charFreq[rightChar])
+        if endIndex - startIndex + 1 - maxRepeatLetterCount > k:
+            leftChar = str1[startIndex]
+            charFreq[leftChar] -= 1
+            startIndex += 1
+        maxLength = max(maxLength, endIndex - startIndex + 1)
     
     return maxLength
+
 
 
 def main():
