@@ -8,22 +8,25 @@
 # Write a function to return the maximum number of fruits in both the baskets.
 
 def fruits_into_baskets(fruits):
-    start = 0
+    startIndex = 0
     maxLength = 0
-    fruitFreq = {}
+    countFruits = {}
 
-    for end in range(len(fruits)):
-        rightFruit = fruits[end]
-        if rightFruit not in fruitFreq.keys():
-            fruitFreq[rightFruit] = 0
-        fruitFreq[rightFruit] += 1
-        while len(fruitFreq) > 2:
-            leftFruit = fruits[start]
-            fruitFreq[leftFruit] -= 1
-            if fruitFreq[leftFruit] == 0:
-                del fruitFreq[leftFruit]
-            start += 1
-        maxLength = max(maxLength, end - start + 1)
+    for endIndex in range(len(fruits)):
+        rightFruit = fruits[endIndex]
+        if rightFruit not in countFruits:
+            countFruits[rightFruit] = 0
+        countFruits[rightFruit] += 1
+
+        while len(countFruits) > 2:
+            leftFruit = fruits[startIndex]
+            startIndex += 1
+            countFruits[leftFruit] -= 1
+            if countFruits[leftFruit] == 0:
+                del countFruits[leftFruit]
+        
+        maxLength = max(maxLength, endIndex - startIndex + 1)
+
     return maxLength
 
 
