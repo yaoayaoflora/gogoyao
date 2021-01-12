@@ -4,14 +4,14 @@
 def length_of_longest_substring(arr, k):
     startIndex = 0
     maxLength = 0
-    maxOnesCount = 0
+    onesCount = 0
 
     for endIndex in range(len(arr)):
         if arr[endIndex] == 1:
-            maxOnesCount += 1
-        while endIndex - startIndex + 1 - maxOnesCount > k:
+            onesCount += 1
+        if endIndex - startIndex + 1 - onesCount > k:
             if arr[startIndex] == 1:
-                maxOnesCount -= 1
+                onesCount -= 1
             startIndex += 1
         maxLength = max(maxLength, endIndex - startIndex + 1)
     
