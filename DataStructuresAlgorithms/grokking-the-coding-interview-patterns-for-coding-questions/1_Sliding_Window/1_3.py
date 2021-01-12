@@ -1,23 +1,26 @@
 # Given a string, find the length of the longest substring in it with no more than K distinct characters.
+
 def longest_substring_with_k_distinct(str1, k):
-    windowStart = 0
+    startIndex = 0
     maxLength = 0
-    charFreq = {}
+    charFrequency = {}
 
-    for windowEnd in range(len(str1)):
-        rightChar = str1[windowEnd]
-        if rightChar not in charFreq.keys():
-            charFreq[rightChar] = 0
-        charFreq[rightChar] += 1
-        while len(charFreq) > k:
-            leftChar = str1[windowStart]
-            charFreq[leftChar] -= 1
-            if charFreq[leftChar] == 0:
-                del charFreq[leftChar]
-            windowStart += 1
-        maxLength = max(maxLength, windowEnd - windowStart + 1)
+    for endIndex in range(len(str1)):
+        rightChar = str1[endIndex]
+        if rightChar not in charFrequency:
+            charFrequency[rightChar] = 0
+        charFrequency[rightChar] += 1
+
+        while len(charFrequency) > k:
+            leftChar = str1[startIndex]
+            startIndex += 1
+            charFrequency[leftChar] -= 1
+            if charFrequency[leftChar] == 0:
+                del charFrequency[leftChar]
+        
+        maxLength = max(maxLength, endIndex - startIndex + 1)
+    
     return maxLength
-
 
 def main():
     print("Length of the longest substr1ing: " + str(longest_substring_with_k_distinct("araaci", 2)))

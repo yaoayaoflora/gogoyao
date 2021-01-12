@@ -5,24 +5,25 @@
 def length_of_longest_substring(str1, k):
     startIndex = 0
     maxLength = 0
-    maxRepeatLetterCount = 0
-    charFreq = {}
+    maxRepeatCharCount = 0
+    charsFrequency = {}
 
     for endIndex in range(len(str1)):
         rightChar = str1[endIndex]
-        if rightChar not in charFreq:
-            charFreq[rightChar] = 0
-        charFreq[rightChar] += 1
-        maxRepeatLetterCount = max(maxRepeatLetterCount, charFreq[rightChar])
-        if endIndex - startIndex + 1 - maxRepeatLetterCount > k:
+        if rightChar not in charsFrequency:
+            charsFrequency[rightChar] = 0
+        charsFrequency[rightChar] += 1
+        maxRepeatCharCount = max(maxRepeatCharCount, charsFrequency[rightChar])
+
+        if endIndex - startIndex + 1 - maxRepeatCharCount > k:
             leftChar = str1[startIndex]
-            charFreq[leftChar] -= 1
             startIndex += 1
+            charsFrequency[leftChar] -= 1
+        
         maxLength = max(maxLength, endIndex - startIndex + 1)
-    
+
     return maxLength
-
-
+    
 
 def main():
     print(length_of_longest_substring("aabccbb", 2))

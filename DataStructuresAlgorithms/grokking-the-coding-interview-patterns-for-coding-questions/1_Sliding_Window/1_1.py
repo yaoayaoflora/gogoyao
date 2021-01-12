@@ -2,16 +2,17 @@
 # contiguous subarray of size ‘k’.
 
 def max_sub_array_of_size_k(k, arr):
-    windowStart = 0
+    startIndex = 0
     maxSum = 0
-    windowSum = 0
+    currentSum = 0
 
-    for windowEnd in range(len(arr)):
-        windowSum += arr[windowEnd]
-        if windowEnd - windowStart >= k: # windowEnd >= k - 1
-            windowSum -= arr[windowStart]
-            windowStart += 1
-        maxSum = max(maxSum, windowSum)
+    for endIndex in range(len(arr)):
+        currentSum += arr[endIndex]
+        maxSum = max(maxSum, currentSum)
+
+        if endIndex >= k - 1:
+            currentSum -= arr[startIndex]
+            startIndex += 1
     
     return maxSum
 
