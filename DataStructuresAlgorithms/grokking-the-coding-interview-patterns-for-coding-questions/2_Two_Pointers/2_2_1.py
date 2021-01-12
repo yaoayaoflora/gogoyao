@@ -7,7 +7,7 @@ def remove_duplicates(arr):
     while i < len(arr):
         if arr[nextNonDuplicate] != arr[i]:
             arr[nextNonDuplicate] = arr[i]
-        nextNonDuplicate +=1
+            nextNonDuplicate +=1
         i += 1
     
     return nextNonDuplicate
