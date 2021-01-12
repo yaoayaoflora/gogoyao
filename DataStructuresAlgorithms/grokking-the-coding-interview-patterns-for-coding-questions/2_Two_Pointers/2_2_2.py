@@ -3,12 +3,13 @@
 
 
 def remove_element(arr, key):
-    nextElement = 0    # index of the next element which is not 'key'
+    nextElement = 0
+
     for i in range(len(arr)):
         if arr[i] != key:
             arr[nextElement] = arr[i]
             nextElement += 1
-
+    
     return nextElement
 
 

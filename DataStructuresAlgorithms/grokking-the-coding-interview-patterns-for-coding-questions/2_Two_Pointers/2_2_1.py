@@ -4,12 +4,13 @@
 def remove_duplicates(arr):
     nextNonDuplicate = 1
     i = 1
+
     while i < len(arr):
-        if arr[nextNonDuplicate] != arr[i]:
+        if arr[i] != arr[nextNonDuplicate-1]:
             arr[nextNonDuplicate] = arr[i]
-            nextNonDuplicate +=1
+            nextNonDuplicate += 1
         i += 1
-    
+
     return nextNonDuplicate
 
 
