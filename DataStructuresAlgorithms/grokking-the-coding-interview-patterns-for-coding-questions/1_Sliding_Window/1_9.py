@@ -3,33 +3,33 @@
 def find_string_anagrams(str1, pattern):
     startIndex = 0
     matched = 0
-    anagrams = []
-    charFreq = {}
+    charFreqToMatch = {}
+    resultIndices = []
 
     for char in pattern:
-        if char not in charFreq:
-            charFreq[char] = 0
-        charFreq[char] += 1
+        if char not in charFreqToMatch:
+            charFreqToMatch[char] = 0
+        charFreqToMatch[char] += 1
     
     for endIndex in range(len(str1)):
         rightChar = str1[endIndex]
-        if rightChar in charFreq:
-            charFreq[rightChar] -= 1
-            if charFreq[rightChar] == 0:
+        if rightChar in charFreqToMatch:
+            charFreqToMatch[rightChar] -= 1
+            if charFreqToMatch[rightChar] == 0:
                 matched += 1
         
-        if matched == len(charFreq):
-            anagrams.append(startIndex)
-
+        if matched == len(charFreqToMatch):
+            resultIndices.append(startIndex)
+        
         if endIndex >= len(pattern) - 1:
             leftChar = str1[startIndex]
             startIndex += 1
-            if leftChar in charFreq:
-                if charFreq[leftChar] == 0:
+            if leftChar in charFreqToMatch:
+                if charFreqToMatch[leftChar] == 0:
                     matched -= 1
-                charFreq[leftChar] += 1
-    
-    return anagrams
+                charFreqToMatch[leftChar] += 1
+        
+    return resultIndices
 
 
 def main():
