@@ -2,14 +2,16 @@
 # in-place and return the new length of the array.
 
 def remove_element(arr, key):
-    nextElement = 0
+    i = 0
+    nextElementIdx = 0
 
-    for i in range(len(arr)):
+    while i < len(arr):
         if arr[i] != key:
-            arr[nextElement] = arr[i]
-            nextElement += 1
+            arr[nextElementIdx] = arr[i]
+            nextElementIdx += 1
+        i += 1
     
-    return nextElement
+    return nextElementIdx
 
 
 def main():
@@ -18,3 +20,6 @@ def main():
 
 
 main()
+
+# Array new length: 4
+# Array new length: 2

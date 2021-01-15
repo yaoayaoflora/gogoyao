@@ -1,26 +1,23 @@
 # Given a sorted array, create a new array containing squares of all the number of the input array in the sorted order.
 
 def make_squares(arr):
-    n = len(arr)
-    squares = [0 for i in range(n)]
-    highestSquareIdx = n - 1
     left = 0
-    right = n - 1
-    
+    right = len(arr) - 1
+    highestSquareIdx = len(arr) - 1
+    squares = [0 for i in range(len(arr))]
+
     while left <= right:
         leftSquare = arr[left] * arr[left]
         rightSquare = arr[right] * arr[right]
-        
-        if leftSquare > rightSquare:
-            squares[highestSquareIdx] = leftSquare
-            left += 1
-            highestSquareIdx -= 1
-        
+
         if leftSquare <= rightSquare:
             squares[highestSquareIdx] = rightSquare
             right -= 1
-            highestSquareIdx -= 1
-    
+        else:
+            squares[highestSquareIdx] = leftSquare
+            left += 1
+        highestSquareIdx -= 1
+
     return squares
     
 
@@ -30,3 +27,6 @@ def main():
 
 
 main()
+
+# Squares: [0, 1, 4, 4, 9]
+# Squares: [0, 1, 1, 4, 9]

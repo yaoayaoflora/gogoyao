@@ -6,24 +6,25 @@ import math
 
 def triplet_sum_close_to_target(arr, targetSum):
     arr.sort()
-    resultSum = 0
     minAbsDiff = math.inf
+    resultSum = 0
+
     for i in range(len(arr)-2):
-        left = i + 1
-        right = len(arr) - 1
-        while left < right:
-            currentSum = arr[i] + arr[left] + arr[right]
+        j = i + 1
+        k = len(arr) - 1
+        while j < k:
+            currentSum = arr[i] + arr[j] + arr[k]
             if currentSum == targetSum:
-                return targetSum
-            if currentSum < targetSum:
-                left += 1
-            if currentSum > targetSum:
-                right -= 1
+                return currentSum
+            elif currentSum < targetSum:
+                j += 1
+            else:
+                k -= 1
             
-            currentDiff = targetSum - currentSum
+            currentDiff = currentSum - targetSum
             if abs(currentDiff) <= minAbsDiff:
                 minAbsDiff = abs(currentDiff)
-                if currentDiff > 0:
+                if currentDiff < 0:
                     resultSum = currentSum
     
     return resultSum

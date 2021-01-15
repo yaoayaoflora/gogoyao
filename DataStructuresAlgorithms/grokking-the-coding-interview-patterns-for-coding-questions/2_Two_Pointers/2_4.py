@@ -3,16 +3,16 @@
 def search_triplets(arr):
     arr.sort()
     triplets = []
-
     for i in range(len(arr)-2):
         if i > 0 and arr[i] == arr[i-1]:
             continue
-        search_pairs(arr, -arr[i], i+1, triplets)
-    
+        search_pairs(arr, -arr[i], i, triplets)
+
     return triplets
 
 
-def search_pairs(arr, targetSum, left, triplets):
+def search_pairs(arr, targetSum, first, triplets):
+    left = first + 1
     right = len(arr) - 1
     while left < right:
         currentSum = arr[left] + arr[right]
@@ -24,9 +24,9 @@ def search_pairs(arr, targetSum, left, triplets):
                 left += 1
             while left < right and arr[right] == arr[right+1]:
                 right -= 1
-        if currentSum < targetSum:
+        elif currentSum < targetSum:
             left += 1
-        if currentSum > targetSum:
+        else:
             right -= 1
 
 
