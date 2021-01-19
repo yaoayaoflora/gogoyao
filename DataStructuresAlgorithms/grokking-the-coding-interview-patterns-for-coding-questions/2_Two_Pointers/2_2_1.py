@@ -2,16 +2,16 @@
 # extra space; after removing the duplicates in-place return the new length of the array.
 
 def remove_duplicates(arr):
-    nextNonDuplicate = 1
-    i = 1
-
-    while i < len(arr):
-        if arr[i] != arr[nextNonDuplicate-1]:
-            arr[nextNonDuplicate] = arr[i]
-            nextNonDuplicate += 1
+    nextNonDuplicateIdx = 1
+    i = 0
+    while i <= len(arr) - 1:
+        if i > 0 and arr[i] != arr[i-1]:
+            arr[nextNonDuplicateIdx] = arr[i]
+            nextNonDuplicateIdx += 1
         i += 1
 
-    return nextNonDuplicate
+    return nextNonDuplicateIdx
+
 
 
 def main():
@@ -20,3 +20,6 @@ def main():
 
 
 main()
+
+# 4
+# 2

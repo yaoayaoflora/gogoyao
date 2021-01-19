@@ -5,22 +5,22 @@ from collections import deque
 
 
 def find_subarrays(arr, target):
-    startIndex = 0
+    startIdx = 0
     product = 1
-    result = []
+    subarrays = []
 
-    for endIndex in range(len(arr)):
-        product *= arr[endIndex]
-        while product >= target and startIndex < len(arr):
-            product /= arr[startIndex]
-            startIndex += 1
-
-        temp_list = deque()
-        for i in range(endIndex, startIndex-1, -1):
-            temp_list.appendleft(arr[i])
-            result.append(list(temp_list))
+    for endIdx in range(len(arr)):
+        product *= arr[endIdx]
+        while startIdx <= endIdx and product >= target:
+            product /= arr[startIdx]
+            startIdx += 1
         
-    return result
+        temp_list = deque()
+        for i in range(endIdx, startIdx-1, -1):
+            temp_list.appendleft(arr[i])
+            subarrays.append(list(temp_list))
+
+    return subarrays
 
 
 def main():
