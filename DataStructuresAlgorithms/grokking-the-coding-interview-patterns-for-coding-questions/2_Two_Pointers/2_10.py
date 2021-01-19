@@ -11,8 +11,10 @@ def backspace_compare(str1, str2):
 
         if i1 < 0 and i2 < 0:
             return True
+
         if i1 < 0 or i2 < 0:
             return False
+
         if str1[i1] != str2[i2]:
             return False
         
@@ -23,12 +25,12 @@ def backspace_compare(str1, str2):
 
 
 def get_next_valid_char_index(str, index):
-    backspace_count = 0
+    backspaceCount = 0
     while index >= 0:
         if str[index] == '#':
-            backspace_count += 1
-        elif backspace_count > 0:
-            backspace_count -= 1
+            backspaceCount += 1
+        elif backspaceCount > 0:
+            backspaceCount -= 1
         else:
             break
 
