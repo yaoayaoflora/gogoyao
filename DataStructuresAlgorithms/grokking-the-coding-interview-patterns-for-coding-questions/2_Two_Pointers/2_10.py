@@ -1,6 +1,7 @@
 # Given two strings containing backspaces (identified by the character ‘#’), check if the two
 # strings are equal.
 
+
 def backspace_compare(str1, str2):
     index1 = len(str1) - 1
     index2 = len(str2) - 1

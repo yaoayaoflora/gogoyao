@@ -1,6 +1,48 @@
 # Given an array, find the length of the smallest subarray in it which when sorted will sort the whole array.
 
+
 import math
+
+
+def shortest_window_sort(arr):
+    left = 0
+    right = len(arr) - 1
+
+    while left < len(arr) - 1 and arr[left] <= arr[left+1]:
+        left += 1
+    
+    if left == len(arr) - 1:
+        return 0
+
+    while right > 0 and arr[right] >= arr[right-1]:
+        right -= 1
+
+    subarrayMax = -math.inf
+    subarrayMin = math.inf
+    for i in range(left, right+1):
+        subarrayMax = max(subarrayMax, arr[i])
+        subarrayMin = max(subarrayMin, arr[i])
+
+    while left > 0 and arr[left-1] > subarrayMin:
+        left -= 1
+    
+    while right < len(arr) - 1 and arr[right+1] <subarrayMax:
+        right += 1
+    
+    return right - left + 1
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def shortest_window_sort(arr):

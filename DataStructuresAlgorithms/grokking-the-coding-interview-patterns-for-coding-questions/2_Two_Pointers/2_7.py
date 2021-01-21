@@ -5,18 +5,18 @@ from collections import deque
 
 
 def find_subarrays(arr, target):
-    startIdx = 0
+    left = 0
     product = 1
     subarrays = []
 
-    for endIdx in range(len(arr)):
-        product *= arr[endIdx]
-        while startIdx <= endIdx and product >= target:
-            product /= arr[startIdx]
-            startIdx += 1
+    for right in range(len(arr)):
+        product *= arr[right]
+        while product >= target:
+            product /= arr[left]
+            left += 1
         
         temp_list = deque()
-        for i in range(endIdx, startIdx-1, -1):
+        for i in range(right, left-1, -1):
             temp_list.appendleft(arr[i])
             subarrays.append(list(temp_list))
 

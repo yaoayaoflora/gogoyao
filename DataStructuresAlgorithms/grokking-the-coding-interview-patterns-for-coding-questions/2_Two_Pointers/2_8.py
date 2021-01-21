@@ -4,21 +4,22 @@
 # array also consists of three different numbers that is why it is called Dutch National Flag
 # problem (https://en.wikipedia.org/wiki/Dutch_national_flag_problem).
 
+
 def dutch_flag_sort(arr):
-    low = 0
-    high = len(arr) - 1
+    left = 0
+    right = len(arr) - 1
     i = 0
 
-    while i <= high:
+    while i <= right:
         if arr[i] == 0:
-            arr[i], arr[low] = arr[low], arr[i]
-            low += 1
+            arr[left], arr[i] = arr[i], arr[left]
+            left += 1
             i += 1
         elif arr[i] == 1:
             i += 1
         else:
-            arr[i], arr[high] = arr[high], arr[i]
-            high -= 1
+            arr[right], arr[i] = arr[i], arr[right]
+            right -= 1
 
 
 def main():
