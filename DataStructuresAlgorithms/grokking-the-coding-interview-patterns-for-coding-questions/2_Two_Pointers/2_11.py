@@ -4,35 +4,31 @@ import math
 
 
 def shortest_window_sort(arr):
-    low = 0
-    high = len(arr) - 1
+    left = 0
+    right = len(arr) - 1
+
+    while left < len(arr) - 1 and arr[left] <= arr[left+1]:
+        left += 1
     
-    # find the first number out of sorting order from the beginning
-    while low < len(arr) - 1 and arr[low] <= arr[low+1]:
-        low += 1
-    if low == len(arr) - 1:
+    if left == len(arr) - 1:
         return 0
 
-    # find the first number out of sorting order from the end
-    while high > 0 and arr[high] >= arr[high-1]:
-        high -= 1
+    while right > 0 and arr[right] >= arr[right-1]:
+        right -= 1
 
-    # find the maximum and minimum of the subarry
-    subarrayMax = -math.inf
     subarrayMin = math.inf
-    for k in range(low, high+1):
-        subarrayMax = max(subarrayMax, arr[k])
-        subarrayMin = min(subarrayMin, arr[k])
+    subarrayMax = -math.inf
+    for i in range(left, right+1):
+        subarrayMin = min(subarrayMin, arr[i])
+        subarrayMax = max(subarrayMax, arr[i])
 
-    # extend the subarray to include any number which is bigger than the minimum of the subarray
-    while low > 0 and arr[low-1] > subarrayMin:
-        low -= 1
+    while left > 0 and arr[left-1] > subarrayMin:
+        left -= 1
 
-    # extend the subarray to include any number which is smaller than the maximum of the subarray
-    while high < len(arr) - 1 and arr[high+1] < subarrayMax:
-        high += 1
-    
-    return high - low + 1
+    while right < len(arr) - 1 and arr[right+1] < subarrayMax:
+        right += 1
+
+    return right - left + 1
 
 
 def main():
