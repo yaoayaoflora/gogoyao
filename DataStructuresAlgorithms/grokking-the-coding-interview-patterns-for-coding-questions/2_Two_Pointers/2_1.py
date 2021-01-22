@@ -1,8 +1,9 @@
 # Given an array of sorted numbers and a target sum, find a pair in the array whose sum is
 # equal to the given target.
-# 
+
 # Write a function to return the indices of the two numbers (i.e. the pair) such that they add up to
 # the given target.
+
 
 def pair_with_targetsum(arr, targetSum):
     left = 0
@@ -12,13 +13,13 @@ def pair_with_targetsum(arr, targetSum):
         currentSum = arr[left] + arr[right]
         if currentSum == targetSum:
             return [left, right]
-        elif currentSum < targetSum:
-            left += 1
-        else:
+        if currentSum > targetSum:
             right -= 1
+        if currentSum < targetSum:
+            left += 1
     
     return [-1, -1]
-
+    
 
 def main():
     print(pair_with_targetsum([1, 2, 3, 4, 6], 6))

@@ -11,7 +11,6 @@ def find_subarrays(arr, target):
 
     for right in range(len(arr)):
         product *= arr[right]
-        
         while product >= target:
             product /= arr[left]
             left += 1
@@ -20,9 +19,9 @@ def find_subarrays(arr, target):
         for i in range(right, left-1, -1):
             temp_list.appendleft(arr[i])
             subarrays.append(list(temp_list))
-        
+
     return subarrays
-    
+
 
 def main():
     print(find_subarrays([2, 5, 3, 10], 30))

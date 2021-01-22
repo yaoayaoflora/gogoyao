@@ -1,8 +1,10 @@
 # Given an array of unsorted numbers, find all unique triplets in it that add up to zero.
 
+
 def search_triplets(arr):
     arr.sort()
     triplets = []
+
     for i in range(len(arr)-2):
         if i > 0 and arr[i] == arr[i-1]:
             continue
@@ -11,12 +13,13 @@ def search_triplets(arr):
     return triplets
 
 
-def search_pairs(arr, targetSum, first, triplets):
-    left = first + 1
+def search_pairs(arr, targetSum, firstIdx, triplets):
+    left = firstIdx + 1
     right = len(arr) - 1
+
     while left < right:
-        currentSum = arr[left] + arr[right]
-        if currentSum == targetSum:
+        curretnSum = arr[left] + arr[right]
+        if curretnSum == targetSum:
             triplets.append([-targetSum, arr[left], arr[right]])
             left += 1
             right -= 1
@@ -24,7 +27,7 @@ def search_pairs(arr, targetSum, first, triplets):
                 left += 1
             while left < right and arr[right] == arr[right+1]:
                 right -= 1
-        elif currentSum < targetSum:
+        elif curretnSum < targetSum:
             left += 1
         else:
             right -= 1

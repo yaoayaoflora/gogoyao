@@ -3,15 +3,13 @@
 
 def remove_duplicates(arr):
     nextNonDuplicateIdx = 1
-    i = 0
-    while i <= len(arr) - 1:
+
+    for i in range(len(arr)):
         if i > 0 and arr[i] != arr[i-1]:
             arr[nextNonDuplicateIdx] = arr[i]
             nextNonDuplicateIdx += 1
-        i += 1
-
+    
     return nextNonDuplicateIdx
-
 
 
 def main():

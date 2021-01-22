@@ -1,6 +1,7 @@
 # Given an array of unsorted numbers and a target number, find all unique quadruplets in it,
 # whose sum is equal to the target number.
 
+
 def search_quadruplets(arr, target):
     arr.sort()
     quadruplets = []
@@ -12,28 +13,28 @@ def search_quadruplets(arr, target):
             if j > i+1 and arr[j] == arr[j-1]:
                 continue
             search_pairs(arr, target, i, j, quadruplets)
-
+        
     return quadruplets
 
 
-def search_pairs(arr, targetSum, first, second, quadruplets):
-    left = second + 1
+def search_pairs(arr, targetSum, firstIdx, SecondIdx, quadruplets):
+    left = SecondIdx + 1
     right = len(arr) - 1
 
     while left < right:
-        currentSum = arr[first] + arr[second] + arr[left] + arr[right]
+        currentSum = arr[firstIdx] + arr[SecondIdx] + arr[left] + arr[right]
         if currentSum == targetSum:
-            quadruplets.append([arr[first], arr[second], arr[left], arr[right]])
+            quadruplets.append([arr[firstIdx], arr[SecondIdx], arr[left], arr[right]])
             left += 1
             right -= 1
             while left < right and arr[left] == arr[left-1]:
                 left += 1
             while left < right and arr[right] == arr[right+1]:
                 right -= 1
-        elif currentSum > targetSum:
-            right -= 1
-        else:
+        elif currentSum < targetSum:
             left += 1
+        else:
+            right -= 1
 
 
 def main():

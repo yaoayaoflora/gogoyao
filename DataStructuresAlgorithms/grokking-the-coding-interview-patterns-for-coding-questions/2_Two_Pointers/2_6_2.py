@@ -1,6 +1,7 @@
 # Write a function to return the list of all such triplets instead of the count. How will
 # the time complexity change in this case?
 
+
 def search_triplets(arr, target):
     arr.sort()
     triplets = []
@@ -10,18 +11,20 @@ def search_triplets(arr, target):
     return triplets
 
 
-def search_pairs(arr, targetSum, first, triplets):
-    left = first + 1
+def search_pairs(arr, targetSum, firstIdx, triplets):
+    left = firstIdx + 1
     right = len(arr) - 1
 
     while left < right:
-        currentSum = arr[first] + arr[left] + arr[right]
+        currentSum = arr[firstIdx] + arr[left] + arr[right]
         if currentSum < targetSum:
             for j in range(right, left, -1):
-                triplets.append([arr[first], arr[left], arr[j]])
+                triplets.append([arr[firstIdx], arr[left], arr[j]])
             left += 1
         else:
             right -= 1
+    
+    return triplets
 
 
 def main():
