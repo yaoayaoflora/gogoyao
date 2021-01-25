@@ -1,6 +1,7 @@
 # Given the head of a Singly LinkedList that contains a cycle, write a function to find the
 # starting node of the cycle.
 
+
 from __future__ import print_function
 
 
@@ -11,24 +12,25 @@ class Node:
     
     def print_list(self):
         temp = self
-        while temp is not None:
+        if temp is not None:
             print(temp.value, end='')
-            temp = temp.next
+            temp = temp.next 
         print()
 
 
 def find_cycle_start(head):
+    slow = head
+    fast = head
     cycle_length = 0
-    slow, fast = head, head
 
     while fast is not None and fast.next is not None:
-        fast = fast.next.next
         slow = slow.next
+        fast = fast.next.next
 
         if fast == slow:
             cycle_length = calculate_cycle_length(slow)
             break
-    
+
     return find_start(head, cycle_length)
 
 
@@ -52,11 +54,11 @@ def find_start(head, cycle_length):
     while cycle_length > 0:
         pointer2 = pointer2.next
         cycle_length -= 1
-    
+
     while pointer1 != pointer2:
         pointer1 = pointer1.next
         pointer2 = pointer2.next
-    
+
     return pointer1
 
 
@@ -79,3 +81,7 @@ def main():
 
 
 main()
+
+# LinkedList cycle start: 3
+# LinkedList cycle start: 4
+# LinkedList cycle start: 1
