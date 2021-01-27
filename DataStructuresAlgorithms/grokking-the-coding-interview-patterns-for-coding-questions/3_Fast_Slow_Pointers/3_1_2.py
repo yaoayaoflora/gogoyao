@@ -8,23 +8,22 @@ class Node:
 
 
 def find_cycle_length(head):
-    fast = head
-    slow = head
+    fast, slow = head, head
     while fast is not None and fast.next is not None:
         slow = slow.next
         fast = fast.next.next
-        if slow == fast:
+        if fast == slow:
             return calculate_cycle_length(slow)
-
+    
     return 0
 
 
 def calculate_cycle_length(slow):
-    current = slow
     cycle_length = 0
+    current = slow
     while True:
-        current = current.next
         cycle_length += 1
+        current = current.next
         if current == slow:
             break
     
