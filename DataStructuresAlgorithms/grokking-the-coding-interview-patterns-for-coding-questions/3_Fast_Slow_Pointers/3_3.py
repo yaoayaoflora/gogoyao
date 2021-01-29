@@ -4,19 +4,20 @@
 
 
 def find_happy_number(num):
-    slow = num
-    fast = num
+    fast, slow = num, num
+
     while True:
-        slow = find_square_sum(slow)
         fast = find_square_sum(find_square_sum(fast))
-        if slow == fast:
+        slow = find_square_sum(slow)
+        if fast == slow:
             break
-    
-    return slow == 1
+
+    return fast == 1
 
 
 def find_square_sum(num):
     square_sum = 0
+
     while num > 0:
         digit = num % 10
         square_sum += digit * digit

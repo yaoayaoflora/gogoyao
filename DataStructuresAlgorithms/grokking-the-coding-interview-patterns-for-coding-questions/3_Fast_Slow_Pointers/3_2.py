@@ -9,44 +9,45 @@ class Node:
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
-    
+
     def print_list(self):
         temp = self
-        if temp is not None:
+        while temp is not None:
             print(temp.value, end='')
-            temp = temp.next 
+            temp = temp.next
         print()
 
 
 def find_cycle_start(head):
-    slow, fast = head, head
+    fast, slow = head, head
     cycle_length = 0
 
     while fast is not None and fast.next is not None:
-        slow = slow.next
         fast = fast.next.next
-
-        if slow == fast:
+        slow = slow.next
+        if fast == slow:
             cycle_length = calculate_cycle_length(slow)
             break
-
+    
     return find_start(head, cycle_length)
 
 
 def calculate_cycle_length(slow):
-    cycle_length = 0
     current = slow
+    cycle_length = 0
+
     while True:
-        current = current.next
         cycle_length += 1
+        current = current.next
         if current == slow:
             break
-
+    
     return cycle_length
 
 
 def find_start(head, cycle_length):
     pointer1, pointer2 = head, head
+
     while cycle_length > 0:
         pointer2 = pointer2.next
         cycle_length -= 1
@@ -54,7 +55,7 @@ def find_start(head, cycle_length):
     while pointer1 != pointer2:
         pointer1 = pointer1.next
         pointer2 = pointer2.next
-
+    
     return pointer1
 
 
