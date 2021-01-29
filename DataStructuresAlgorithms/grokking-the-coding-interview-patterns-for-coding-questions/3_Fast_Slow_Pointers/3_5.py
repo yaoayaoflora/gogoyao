@@ -14,12 +14,12 @@ class Node:
 def is_palindromic_linked_list(head):
     if head is None or head.next is None:
         return True
-    
-    slow = head
-    fast = head
+
+    fast, slow = head, head
     while fast is not None and fast.next is not None:
-        slow = slow.next
         fast = fast.next.next
+        slow = slow.next
+
     head_second_half = reverse(slow)
     copy_head_second_half = head_second_half
 
@@ -28,10 +28,10 @@ def is_palindromic_linked_list(head):
             break
         head = head.next
         head_second_half = head_second_half.next
-
+    
     reverse(copy_head_second_half)
 
-    if head is None and head_second_half is None:
+    if head is None or head_second_half is None:
         return True
 
     return False
