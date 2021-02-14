@@ -34,7 +34,8 @@ def find_paths_recursive(currentNode, sum, currentPath, allPaths):
     
     # we need to remove the current node while we are going up the recursive call stack
     # remove the current node from the path to backtrack
-    del currentPath[-1]
+    # del currentPath[-1]
+    currentPath.pop()
 
 
 def main():
