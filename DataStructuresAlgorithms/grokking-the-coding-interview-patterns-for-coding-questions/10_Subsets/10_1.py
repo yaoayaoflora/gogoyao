@@ -3,13 +3,13 @@
 
 def find_subsets(nums):
     subsets = []
-    # start by adding the empty subset
+    # start by adding the empty subsets
     subsets.append([])
     for currentNumber in nums:
-        # we will take all existing subsets and insert the current number in them to create new subsets
+        # take all existing subsets and insert the current number into them to create new subsets
         n = len(subsets)
         for i in range(n):
-            # create a new subset from the existing subset and insert the current number to it
+            # create a new subset from the existing subset and insert the current number into it
             set = list(subsets[i])
             set.append(currentNumber)
             subsets.append(set)

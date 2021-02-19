@@ -9,12 +9,12 @@ def find_subsets(nums):
 
     for i in range(len(nums)):
         startIndex = 0
-        # if the current and the previous elements are the same, create new subsets only from the subsets
+        # if the current and the previous number are the same, create new subsets only from the subsets
         # added in the previous step
         if i > 0 and nums[i] == nums[i-1]:
             startIndex = endIndex + 1
         endIndex = len(subsets) - 1
-        
+
         for j in range(startIndex, endIndex+1):
             # create a new subset from the existing subset and add the current element to it
             set = list(subsets[j])
