@@ -1,5 +1,6 @@
 # Given a string, find the length of the longest substring which has no repeating characters.
 
+
 def non_repeat_substring(str1):
     startIndex = 0
     maxLength = 0
@@ -13,6 +14,7 @@ def non_repeat_substring(str1):
         maxLength = max(maxLength, endIndex - startIndex + 1)
     
     return maxLength
+
 
 def main():
     print("Length of the longest substring: " + str(non_repeat_substring("aabccbb")))
