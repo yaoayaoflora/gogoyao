@@ -15,12 +15,12 @@ def binary_search(arr, key):
 
         if key == arr[mid]:
             return mid
-        
+
         if isAscending:
             if key < arr[mid]:
-                end = mid - 1    # the 'key' can be in the first half
+                end = mid - 1
             else:
-                start = mid + 1    # the 'key' can be in the second half
+                start = mid + 1
         else:
             if key > arr[mid]:
                 end = mid - 1
